@@ -6,6 +6,7 @@ import minus_sign from "../images/minus-sign.png";
 
 const ExpenseItem = (props) => {
     const { dispatch } = useContext(AppContext);
+    const { currency } = useContext(AppContext);
 
 	const imagesList = [
 	  {
@@ -57,10 +58,10 @@ const ExpenseItem = (props) => {
 		
         <tr>
         <td>{props.name}</td>
-        <td>£{props.cost}</td>
-        <td><img src={plus_sign} height={20} width={20}  onClick={event=> increaseAllocation(props.name)}/></td>
-        <td><img src={minus_sign} height={20} width={20}  onClick={event=> decreaseAllocation(props.name)}/></td>
-        <td><TiDelete size='1.5em' onClick={handleDeleteExpense}></TiDelete></td>
+        <td>{currency}{props.cost}</td>
+        <td align="center"><img src={plus_sign} height={20} width={20}  onClick={event=> increaseAllocation(props.name)}/></td>
+        <td align="center"><img src={minus_sign} height={20} width={20}  onClick={event=> decreaseAllocation(props.name)}/></td>
+        <td align="center"><TiDelete size='1.5em' onClick={handleDeleteExpense}></TiDelete></td>
         </tr>
     );
 };

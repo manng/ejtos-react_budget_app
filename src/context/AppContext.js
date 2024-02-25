@@ -33,10 +33,14 @@ export const AppReducer = (state, action) => {
             
         case 'RED_EXPENSE':
                 const red_expenses = state.expenses.map((currentExp)=> {
-                    if (currentExp.name === action.payload.name && currentExp.cost - action.payload.cost >= 0) {
+                    if (currentExp.name === action.payload.name) {
+                      if (currentExp.cost - action.payload.cost >= 0) {
                         currentExp.cost =  currentExp.cost - action.payload.cost;
                         budget = state.budget + action.payload.cost
-                    }
+	                  } else {
+						alert("Error, trying to reduce budget allocated to " + action.payload.name + " to less than zero.")
+					  }
+					}
                     return currentExp
                 })
                 action.type = "DONE";
@@ -87,7 +91,7 @@ const initialState = {
         { id: "Marketing", name: 'Marketing', cost: 50 },
         { id: "Finance", name: 'Finance', cost: 300 },
         { id: "Sales", name: 'Sales', cost: 70 },
-        { id: "Human Resource", name: 'Human Resource', cost: 40 },
+        { id: "Human Resources", name: 'Human Resources', cost: 40 },
         { id: "IT", name: 'IT', cost: 500 },
         { id: "Admin", name: 'Admin', cost: 50 },
     ],
@@ -117,8 +121,8 @@ export const AppProvider = (props) => {
                 expenses: state.expenses,
                 budget: state.budget,
                 remaining: remaining,
-                dispatch,
-                currency: state.currency
+                currency: state.currency,
+                dispatch
             }}
         >
             {props.children}
