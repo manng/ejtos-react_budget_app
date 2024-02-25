@@ -13,6 +13,12 @@ const Budget = () => {
 			alert("The budget cannot be below the already allocated expenses: " + currency + totalExpenses);
 			setNewBudget(totalExpenses);
 			dispatch({type: 'SET_BUDGET', payload: totalExpenses});
+		}
+		else if (event.target.value > 20000)
+		{
+			alert("The budget cannot exceed: " + currency + "20000");
+			setNewBudget(20000);
+			dispatch({type: 'SET_BUDGET', payload: 20000});
 		} 
 		else 
 		{		
@@ -26,7 +32,6 @@ const Budget = () => {
 		<input type="number" 
 		       step="10" 
 		       value={newBudget} 
-		       max="20000" 
 		       onChange={handleBudgetChange}></input>
 	</div>
     );
